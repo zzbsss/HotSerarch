@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzb.hot.mapper.CollectConfigMapper">
+
+    <resultMap type="org.zzb.hot.domain.CollectConfig" id="CollectConfigResult">
+        <result property="collectConfigId"    column="collect_config_id"    />
+        <result property="collectId"    column="collect_id"    />
+        <result property="configName"    column="config_name"    />
+        <result property="collectParam"    column="collect_param"    />
+        <result property="configVersion"    column="config_version"    />
+        <result property="effect"    column="effect"    />
+        <result property="maxCount"    column="max_count"    />
+        <result property="recordData"    column="record_data"    />
+        <result property="collectExpression"    column="collect_expression"    />
+        <result property="charset"    column="charset"    />
+        <result property="cron"    column="cron"    />
+        <result property="requestConfig"    column="request_config"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="creater"    column="creater"    />
+        <result property="updater"    column="updater"    />
+    </resultMap>
+
+    <sql id="selectCollectConfigVo">
+        select collect_config_id, collect_id, config_name, collect_param, config_version,request_config, effect,max_count, record_data,cron, collect_expression, charset, create_time, update_time, creater, updater from collect_config
+    </sql>
+
+    <select id="selectCollectConfigList" parameterType="org.zzb.hot.domain.CollectConfig" resultMap="CollectConfigResult">
+        <include refid="selectCollectConfigVo"/>
+        <where>
+            <if test="collectId != null "> and collect_id = #{collectId}</if>
+            <if test="configName != null  and configName != ''"> and config_name like concat('%', #{configName}, '%')</if>
+            <if test="collectParam != null  and collectParam != ''"> and collect_param = #{collectParam}</if>
+            <if test="configVersion != null  and configVersion != ''"> and config_version = #{configVersion}</if>
+            <if test="effect != null  and effect != ''"> and effect = #{effect}</if>
+            <if test="maxCount != null  and maxCount != ''"> and max_count = #{maxCount}</if>
+            <if test="recordData != null  and recordData != ''"> and record_data = #{recordData}</if>
+            <if test="requestConfig != null  and requestConfig != ''"> and request_config = #{requestConfig}</if>
+            <if test="cron != null  and cron != ''"> and cron = #{cron}</if>
+            <if test="collectExpression != null  and collectExpression != ''"> and collect_expression = #{collectExpression}</if>
+            <if test="charset != null  and charset != ''"> and charset = #{charset}</if>
+            <if test="creater != null  and creater != ''"> and creater = #{creater}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+
+    <select id="selectCollectConfigById" parameterType="Long" resultMap="CollectConfigResult">
+        <include refid="selectCollectConfigVo"/>
+        where collect_config_id = #{collectConfigId}
+    </select>
+
+    <insert id="insertCollectConfig" parameterType="org.zzb.hot.domain.CollectConfig" useGeneratedKeys="true" keyProperty="collectConfigId">
+        insert into collect_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collectId != null">collect_id,</if>
+            <if test="configName != null and configName != ''">config_name,</if>
+            <if test="collectParam != null">collect_param,</if>
+            <if test="configVersion != null and configVersion != ''">config_version,</if>
+            <if test="effect != null">effect,</if>
+            <if test="maxCount != null">max_count,</if>
+            <if test="recordData != null">record_data,</if>
+            <if test="requestConfig != null">request_config,</if>
+            <if test="cron != null">cron,</if>
+            <if test="collectExpression != null">collect_expression,</if>
+            <if test="charset != null">charset,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="creater != null">creater,</if>
+            <if test="updater != null">updater,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collectId != null">#{collectId},</if>
+            <if test="configName != null and configName != ''">#{configName},</if>
+            <if test="collectParam != null">#{collectParam},</if>
+            <if test="configVersion != null and configVersion != ''">#{configVersion},</if>
+            <if test="effect != null">#{effect},</if>
+            <if test="maxCount != null">#{maxCount},</if>
+            <if test="recordData != null">#{recordData},</if>
+            <if test="requestConfig != null">#{requestConfig},</if>
+            <if test="cron != null">#{cron},</if>
+            <if test="collectExpression != null">#{collectExpression},</if>
+            <if test="charset != null">#{charset},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="creater != null">#{creater},</if>
+            <if test="updater != null">#{updater},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCollectConfig" parameterType="org.zzb.hot.domain.CollectConfig">
+        update collect_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="collectId != null">collect_id = #{collectId},</if>
+            <if test="configName != null and configName != ''">config_name = #{configName},</if>
+            <if test="collectParam != null">collect_param = #{collectParam},</if>
+            <if test="configVersion != null and configVersion != ''">config_version = #{configVersion},</if>
+            <if test="effect != null">effect = #{effect},</if>
+            <if test="maxCount != null">max_count = #{maxCount},</if>
+            <if test="recordData != null">record_data = #{recordData},</if>
+            <if test="requestConfig != null">request_config = #{requestConfig},</if>
+            <if test="cron != null">cron = #{cron},</if>
+            <if test="collectExpression != null">collect_expression = #{collectExpression},</if>
+            <if test="charset != null">charset = #{charset},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="creater != null">creater = #{creater},</if>
+            <if test="updater != null">updater = #{updater},</if>
+        </trim>
+        where collect_config_id = #{collectConfigId}
+    </update>
+
+    <delete id="deleteCollectConfigById" parameterType="Long">
+        delete from collect_config where collect_config_id = #{collectConfigId}
+    </delete>
+
+    <delete id="deleteCollectConfigByIds" parameterType="String">
+        delete from collect_config where collect_config_id in
+        <foreach item="collectConfigId" collection="array" open="(" separator="," close=")">
+            #{collectConfigId}
+        </foreach>
+    </delete>
+
+</mapper>

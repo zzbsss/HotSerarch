@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzb.hot.mapper.CollectContentMapper">
+
+    <resultMap type="org.zzb.hot.domain.CollectContent" id="CollectContentResult">
+        <result property="collectContentId"    column="collect_content_id"    />
+        <result property="title"    column="title"    />
+        <result property="url"    column="url"    />
+        <result property="img"    column="img"    />
+        <result property="param"    column="param"    />
+        <result property="configId"    column="config_id"    />
+        <result property="collectId"    column="collect_id"    />
+        <result property="configDesc"    column="config_desc"    />
+        <result property="hotOrder"    column="hot_order"    />
+        <result property="hotMetric"    column="hot_metric"    />
+        <result property="datastr"    column="datastr"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="creater"    column="creater"    />
+    </resultMap>
+
+    <sql id="selectCollectContentVo">
+        select collect_content_id, title, url, img, hot_order,hot_metric,collect_id,config_id, datastr, create_time, creater from collect_content
+    </sql>
+
+    <select id="selectCollectContentList" parameterType="org.zzb.hot.domain.CollectContent" resultMap="CollectContentResult">
+        <include refid="selectCollectContentVo"/>
+        <where>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="img != null  and img != ''"> and img = #{img}</if>
+            <if test="hotOrder != null "> and hot_order = #{hotOrder}</if>
+            <if test="hotMetric != null "> and hot_metric = #{hotMetric}</if>
+            <if test="configId != null "> and config_id = #{configId}</if>
+            <if test="collectId != null "> and collect_id = #{collectId}</if>
+            <if test="param != null "> and param = #{param}</if>
+            <if test="configDesc != null "> and config_desc = #{configDesc}</if>
+            <if test="datastr != null  and datastr != ''"> and datastr = #{datastr}</if>
+            <if test="creater != null  and creater != ''"> and creater = #{creater}</if>
+        </where>
+    </select>
+
+    <select id="selectCollectContentById" parameterType="Long" resultMap="CollectContentResult">
+        <include refid="selectCollectContentVo"/>
+        where collect_content_id = #{collectContentId}
+    </select>
+
+    <insert id="insertCollectContent" parameterType="org.zzb.hot.domain.CollectContent" useGeneratedKeys="true" keyProperty="collectContentId">
+        insert into collect_content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="url != null">url,</if>
+            <if test="img != null">img,</if>
+            <if test="hotOrder != null">hot_order,</if>
+            <if test="hotMetric != null">hot_metric,</if>
+            <if test="collectId != null">collect_id,</if>
+            <if test="configId != null">config_id,</if>
+            <if test="datastr != null">datastr,</if>
+            <if test="configDesc != null">config_desc,</if>
+            <if test="param != null">param,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="creater != null">creater,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="url != null">#{url},</if>
+            <if test="img != null">#{img},</if>
+            <if test="hotOrder != null">#{hotOrder},</if>
+            <if test="hotMetric != null">#{hotMetric},</if>
+            <if test="collectId != null">#{collectId},</if>
+            <if test="configId != null">#{configId},</if>
+            <if test="datastr != null">#{datastr},</if>
+            <if test="configDesc != null">#{configDesc},</if>
+            <if test="param != null">#{param},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="creater != null">#{creater},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCollectContent" parameterType="org.zzb.hot.domain.CollectContent">
+        update collect_content
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="hotOrder != null">hot_order = #{hotOrder},</if>
+            <if test="hotMetric != null">hot_metric = #{hotMetric},</if>
+            <if test="configId != null">config_id = #{configId},</if>
+            <if test="collectId != null">collect_id = #{collectId},</if>
+            <if test="datastr != null">datastr = #{datastr},</if>
+            <if test="configDesc != null">config_desc = #{configDesc},</if>
+            <if test="param != null">param = #{param},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="creater != null">creater = #{creater},</if>
+        </trim>
+        where collect_content_id = #{collectContentId}
+    </update>
+
+    <delete id="deleteCollectContentById" parameterType="Long">
+        delete from collect_content where collect_content_id = #{collectContentId}
+    </delete>
+
+    <delete id="deleteCollectContentByIds" parameterType="String">
+        delete from collect_content where collect_content_id in
+        <foreach item="collectContentId" collection="array" open="(" separator="," close=")">
+            #{collectContentId}
+        </foreach>
+    </delete>
+
+</mapper>

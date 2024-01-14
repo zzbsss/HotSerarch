@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzb.hot.mapper.CollectWebMapper">
+
+    <resultMap type="org.zzb.hot.domain.CollectWeb" id="CollectWebResult">
+        <result property="collectId"    column="collect_id"    />
+        <result property="collectEndpoint"    column="collect_endpoint"    />
+        <result property="collectTitle"    column="collect_title"    />
+        <result property="collectType"    column="collect_type"    />
+        <result property="effecct"    column="effecct"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="creater"    column="creater"    />
+        <result property="updater"    column="updater"    />
+        <result property="collectCode"    column="collect_code"    />
+        <result property="collectDesc"    column="collect_desc"    />
+    </resultMap>
+
+    <sql id="selectCollectWebVo">
+        select collect_id, collect_endpoint, collect_title,collect_code, collect_type, effecct, create_time, update_time, creater, updater, collect_desc from collect_web
+    </sql>
+
+    <select id="selectCollectWebList" parameterType="org.zzb.hot.domain.CollectWeb" resultMap="CollectWebResult">
+        <include refid="selectCollectWebVo"/>
+        <where>
+            <if test="collectEndpoint != null  and collectEndpoint != ''"> and collect_endpoint = #{collectEndpoint}</if>
+            <if test="collectTitle != null  and collectTitle != ''"> and collect_title = #{collectTitle}</if>
+            <if test="collectType != null "> and collect_type = #{collectType}</if>
+            <if test="effecct != null  and effecct != ''"> and effecct = #{effecct}</if>
+            <if test="collectCode != null  and collectCode != ''"> and collect_code = #{collectCode}</if>
+            <if test="creater != null  and creater != ''"> and creater = #{creater}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+            <if test="collectDesc != null  and collectDesc != ''"> and collect_desc = #{collectDesc}</if>
+        </where>
+    </select>
+
+    <select id="selectCollectWebById" parameterType="Long" resultMap="CollectWebResult">
+        <include refid="selectCollectWebVo"/>
+        where collect_id = #{collectId}
+    </select>
+
+    <insert id="insertCollectWeb" parameterType="org.zzb.hot.domain.CollectWeb" useGeneratedKeys="true" keyProperty="collectId">
+        insert into collect_web
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collectEndpoint != null">collect_endpoint,</if>
+            <if test="collectTitle != null">collect_title,</if>
+            <if test="collectType != null">collect_type,</if>
+            <if test="collectCode != null">collect_code,</if>
+            <if test="effecct != null">effecct,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="creater != null">creater,</if>
+            <if test="updater != null">updater,</if>
+            <if test="collectDesc != null">collect_desc,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collectEndpoint != null">#{collectEndpoint},</if>
+            <if test="collectTitle != null">#{collectTitle},</if>
+            <if test="collectType != null">#{collectType},</if>
+            <if test="collectCode != null">#{collectCode},</if>
+            <if test="effecct != null">#{effecct},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="creater != null">#{creater},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="collectDesc != null">#{collectDesc},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCollectWeb" parameterType="org.zzb.hot.domain.CollectWeb">
+        update collect_web
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="collectEndpoint != null">collect_endpoint = #{collectEndpoint},</if>
+            <if test="collectTitle != null">collect_title = #{collectTitle},</if>
+            <if test="collectType != null">collect_type = #{collectType},</if>
+            <if test="collectCode != null">collect_code = #{collectCode},</if>
+            <if test="effecct != null">effecct = #{effecct},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="creater != null">creater = #{creater},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="collectDesc != null">collect_desc = #{collectDesc},</if>
+        </trim>
+        where collect_id = #{collectId}
+    </update>
+
+    <delete id="deleteCollectWebById" parameterType="Long">
+        delete from collect_web where collect_id = #{collectId}
+    </delete>
+
+    <delete id="deleteCollectWebByIds" parameterType="String">
+        delete from collect_web where collect_id in
+        <foreach item="collectId" collection="array" open="(" separator="," close=")">
+            #{collectId}
+        </foreach>
+    </delete>
+
+</mapper>
