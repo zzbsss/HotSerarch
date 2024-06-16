@@ -13,6 +13,6 @@
 4.访问接口 http://localhost:8090/hot/search/api/admin/queryRealTime
 
 ### 效果展示
-![img1.png](img1.png)
+![image1.jpg](image1.jpg)
 ### todos
 
