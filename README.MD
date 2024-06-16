@@ -1,16 +1,18 @@
-## ����Ŀ������������ʹ�ã�������������;
-> ��Ŀ���
-> ʵʱ��ʱץȡ������ƽ̨���������ݣ�����weblogic������һ�����Զ��塢����չ��ץȡ���ݹ��̣�
-> Ŀǰ��ʵ�֣�ĳ����ĳ����ĳ�ȡ�ĳ����ƽ̨����������ץȡ
+## 本项目仅供个人娱乐使用，请勿做其他用途
+> 项目简介
+> 实时或定时抓取各网络平台的热搜数据，基于weblogic爬虫框架一个可自定义、可扩展的抓取数据工程；
+> 目前已实现，某乎、某音、某度、某博等平台的热搜数据抓取
 
-### ʵʱ�ӿڷ�����������
+### 实时接口返回数据如下
 ![img.png](img.png)
 
-### ��Ŀ����
-1.�½����ݿ� hot-search
-2.����init.sql�еĽű�
-3.��������
-4.���ʽӿ� http://localhost:8090/hot/search/api/admin/queryRealTime
+### 项目运行
+1.新建数据库 hot-search
+2.运行init.sql中的脚本
+3.启动运行
+4.访问接口 http://localhost:8090/hot/search/api/admin/queryRealTime
 
+### 效果展示
+![img1.png](img1.png)
 ### todos
-ǰ�˽������ƣ�Ŀǰֻ�к�˽ӿڣ�û��ǰ�˽���
+
